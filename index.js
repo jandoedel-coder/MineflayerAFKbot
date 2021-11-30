@@ -28,15 +28,17 @@ app.get('/addbot', (req, res) => {
         const bot = mineflayer.createBot({
             host: req.header('ip'), 
             username: req.header('username'), 
-            password: req.header('password'), 
-            port: req.header('port'),             
-            version: req.header('version'),
+            password: req.header('password'),           
+            version: req.header('version')
 
         
         })
-        res.send(`Logged in on ${req.headers.ip} with username ${res.headers.username}`)
+        bot.on('kicked', console.log)
+bot.on('error', console.log)
+        res.send(`Logged in on ${req.headers.ip} with username ${req.header('username')}`)
     }
 })
+
 
 
 app.listen(port || 3000, () => {
